@@ -2,7 +2,6 @@
 from selenium import webdriver
 import unittest
 from pages.info_page import InfoPage
-from pages.login_page import Login_DuoBY
 
 class Info(unittest.TestCase):
     '''

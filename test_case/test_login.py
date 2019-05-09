@@ -4,7 +4,6 @@ from selenium import webdriver
 import unittest
 from pages.login_page import Login_DuoBY
 from common.base import Base
-import time
 
 '''
 
