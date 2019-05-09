@@ -10,7 +10,7 @@ class Login_DuoBY(Base):
 	loc_jump=('link text','多贝云')
 	loc_admin=('id','login_name')
 
-	def login_fuc(self,username='admin',psw='12345'):    
+	def login_fuc(self,username='admin',psw='12345'):
 		'''登录网站多贝云'''
 		self.sendKeys(self.loc_user,username)
 		self.sendKeys(self.loc_pwd,psw)
