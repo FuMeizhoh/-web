@@ -6,7 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 
 class Base():
-	'''基于原生的selenium做二次封装---by LIU JF'''
+	'''selenium简单再封装（基础操作的方法）---by LIU JF'''
 	def __init__(self,driver:webdriver.Firefox):
 		self.driver = driver
 		self.timeout=10
@@ -15,7 +15,7 @@ class Base():
 	def findElementNew(self, locator):
 		'''定位到元素，返回元素对象，没定位到，Timeout异常'''
 		if not isinstance(locator, tuple):
-			print('locator参数类型错误，必须传元祖类型：loc = ("id", "value1")')
+			print('locator参数类型错误，必须传元祖类型：loc = ("id", "value1")')		#打印注释一下，加深记忆
 		else:
 			print("正在定位元素信息：定位方式->%s, value值->%s"%(locator[0], locator[1]))
 			ele = WebDriverWait(self.driver, self.timeout, self.t).until(EC.presence_of_element_located(locator))
@@ -88,38 +88,38 @@ class Base():
 			print("定位到元素的个数：%s"%n)
 			return  True
 
-	def is_title(self, _title=''):
+	def is_title(self, title):
 		'''返回bool值'''
 		try:
-			result = WebDriverWait(self.driver, self.timeout, self.t).until(EC.title_is(_title))
+			result = WebDriverWait(self.driver, self.timeout, self.t).until(EC.title_is(title))
 			return result
 		except:
 			return False
 
-	def is_title_contains(self, _title=''):
+	def is_title_contains(self, title):
 		'''返回bool值'''
 		try:
-			result = WebDriverWait(self.driver, self.timeout, self.t).until(EC.title_contains(_title))
+			result = WebDriverWait(self.driver, self.timeout, self.t).until(EC.title_contains(title))
 			return result
 		except:
 			return False
 
-	def is_text_in_element(self, locator, _text=''):
+	def is_text_in_element(self, locator, text):
 		'''返回bool值'''
 		if not isinstance(locator, tuple):
 			print('locator参数类型错误，必须传元祖类型：loc = ("id", "value1")')
 		try:
-			result = WebDriverWait(self.driver, self.timeout, self.t).until(EC.text_to_be_present_in_element(locator, _text))
+			result = WebDriverWait(self.driver, self.timeout, self.t).until(EC.text_to_be_present_in_element(locator,text))
 			return result
 		except:
 			return False
 
-	def is_value_in_element(self, locator, _value=''):
+	def is_value_in_element(self, locator, value):
 		'''返回bool值, value为空字符串，返回Fasle, 例子：不是文本，是value属性值，‘百度一下’为例'''
 		if not isinstance(locator, tuple):
 			print('locator参数类型错误，必须传元祖类型：loc = ("id", "value1")')
 		try:
-			result = WebDriverWait(self.driver, self.timeout, self.t).until(EC.text_to_be_present_in_element_value(locator, _value))
+			result = WebDriverWait(self.driver, self.timeout, self.t).until(EC.text_to_be_present_in_element_value(locator,value))
 			return result
 		except:
 			return False
