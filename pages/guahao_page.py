@@ -33,18 +33,18 @@ class Register_Page(Base):
     def jibing_kanbing(self):
         '''按疾病-去看病'''
         self.click(self.loc_gua)
-        h = driver.window_handles
+        h = self.driver.window_handles
         self.switch_handle(h[1])
         self.click(self.loc_jibing)
         self.click(self.loc_erkexue)
         self.click(self.loc_xiaoerhuxi)
         self.click(self.loc_xiaoerfeiyan)
-        h1 = driver.window_handles
+        h1 = self.driver.window_handles
         self.switch_handle(h1[2])
         self.move_to_element(self.loc_city1)
         time.sleep(3)
         self.click(self.loc_doctorlist)
-        h2 = driver.window_handles
+        h2 = self.driver.window_handles
         self.switch_handle(h2[3])
         self.click(self.loc_kanbing)
 
@@ -52,18 +52,18 @@ class Register_Page(Base):
     def jibing_guahao(self):
         '''按疾病-去挂号'''
         self.click(self.loc_gua)
-        h = driver.window_handles
+        h = self.driver.window_handles
         self.switch_handle(h[1])
         self.click(self.loc_jibing)
         self.click(self.loc_erkexue)
         self.click(self.loc_xiaoerhuxi)
         self.click(self.loc_xiaoerfeiyan)
-        h1 = driver.window_handles
+        h1 = self.driver.window_handles
         self.switch_handle(h1[2])
         self.move_to_element(self.loc_city1)
         time.sleep(3)
         self.click(self.loc_doctorlist)
-        h2 = driver.window_handles
+        h2 = self.driver.window_handles
         self.switch_handle(h2[3])
         self.click(self.loc_guahao)
 
@@ -80,39 +80,39 @@ class Register_Page(Base):
     def hospital_zixun(self):
         '''按医院-咨询我'''
         self.click(self.loc_gua)
-        h1 = driver.window_handles
+        h1 = self.driver.window_handles
         self.switch_handle(h1[1])
         self.click(self.loc_yiyuan)
         self.click(self.loc_city2)
         self.click(self.loc_town)
         self.click(self.loc_hospital)
-        h2 = driver.window_handles
+        h2 = self.driver.window_handles
         self.switch_handle(h2[2])
         self.js_focus_element(self.loc_pifuke)
         self.click(self.loc_pifuke)
         self.click(self.loc_zixun)
-        h3 = driver.window_handles
+        h3 = self.driver.window_handles
         self.switch_handle(h3[3])
         self.click(self.loc_zixunwo)
 
     def hospital_tel(self):
         '''按医院-可通电话'''
         self.click(self.loc_gua)
-        h1 = driver.window_handles
+        h1 = self.driver.window_handles
         self.switch_handle(h1[1])
         self.click(self.loc_yiyuan)
         self.click(self.loc_city2)
         self.click(self.loc_town)
         self.click(self.loc_hospital)
-        h2 = driver.window_handles
+        h2 = self.driver.window_handles
         self.switch_handle(h2[2])
         self.js_focus_element(self.loc_pifuke)
         self.click(self.loc_pifuke)
         self.click(self.loc_zixun)
-        h3 = driver.window_handles
+        h3 = self.driver.window_handles
         self.switch_handle(h3[3])
         self.click(self.loc_call_tel)
-        print(driver.current_url)           #页面跳转随机？
+        print(self.driver.current_url)           #页面跳转随机？
 
 
 

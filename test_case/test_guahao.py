@@ -5,13 +5,12 @@ from pages.login_page import Login_Hdf
 
 class Info(unittest.TestCase):
     '''预约挂号'''
-    loc_gua=('link text','预约挂号')
-
 
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.aa = Register_Page(self.driver)
         self.bb = Login_Hdf(self.driver)
+        self.driver.get("https://passport.haodf.com/user/showlogin")
         self.bb.login_fuc()
 
     def test01(self):
