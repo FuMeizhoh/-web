@@ -1,74 +1,52 @@
 #登录页
-
 from selenium import webdriver
 import unittest
-from pages.login_page import Login_DuoBY
+from pages.login_page import Login_Hdf
 from common.base import Base
 
-'''
-
-1、输入admin ,输入123456 点登录   期望结果：登陆后用户名一致
-2、输入admin ,输入 空，点登录  期望结果：登录失败
-3、输入admin，输入123 ，点登录   期望结果：登录失败
-4、点忘记密码
-
-'''
-
 class Login(unittest.TestCase):
-    '''
-    登录用例
-    '''
+    '''登录页面case'''
+
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Firefox()
-        cls.aa = Login_DuoBY(cls.driver)
+        cls.aa = Login_Hdf(cls.driver)
         cls.bb = Base(cls.driver)
 
     def setUp(self):
-        self.driver.get("http://www.duobeiyun.com/login")
+        self.driver.get("https://passport.haodf.com/user/showlogin")
         self.driver.delete_all_cookies()
         self.driver.refresh()
 
-
     def test01(self):
-        '''输入admin ,输入123456 点登录   期望结果：登陆后用户名一致'''
-        self.aa.login_fuc()
+        '''用户名：hdfnfs35rta 密码：Ljf123 点击登录，期望结果：登录成功 '''
+        self.aa.login_fuc(username='hdfnfs35rta',psw='Ljf123')
         t = self.aa.is_logined()
-        self.assertTrue(t=="admin")
+        self.assertTrue(t=="hdfnfs35rta")
 
     def test02(self):
-        '''输入admin ,输入 空，点登录  期望结果：登录失败'''
-        self.aa.username('admin')
-        self.aa.password('')
-        self.aa.click()
-        a=self.bb.is_alert()
-        print(a.text)
-        self.assertTrue(a.text=='登录失败，请检查您的用户名或密码是否填写正确' or '您还有3次尝试机会。'or '您还有2次尝试机会。'or '您还有1次尝试机会。' )
-        a.accept()
+        '''手机号:13011068815 密码：Ljf123 点击登录，期望结果：登录成功'''
+        self.aa.login_fuc(username='13011068815',psw='Ljf123')
+        t = self.aa.is_logined()
+        self.assertTrue(t=="hdfnfs35rta")
 
     def test03(self):
-        '''输入admin，输入123 ，点登录   期望结果：登录失败'''
-        self.aa.username('admin')
-        self.aa.password('123')
-        self.aa.click()
-        a=self.bb.is_alert()
-        print(a.text)
-        self.assertTrue(a.text=='登录失败，请检查您的用户名或密码是否填写正确' or '您还有3次尝试机会。'or '您还有2次尝试机会。'or '您还有1次尝试机会。' )
-        a.accept()
+        '''手机号:13011068814 密码：Ljf123 点击登录，期望结果：用户名不存在'''
+        self.aa.username('13011068814')
+        self.aa.password('Ljf123')
+        self.aa.click_login()
+        loc = ('xpath','.//*[text()="用户名不存在"]')
+        text= self.aa.get_text(loc)
+        self.assertTrue(text=='用户名不存在')
 
     def test04(self):
-        '''点忘记密码'''
-        self.aa.forget_pwd()
-        loc_reset = ("xpath",".//*[text()='密码重置']")
-        title = self.bb.get_text(loc_reset)
-        self.assertTrue(title=='密码重置')
-
-    def test05(self):
-        '''从登录页进入介绍页'''
-        self.aa.douby_jump()
-        t = self.driver.current_url
-        print(t)
-        self.assertTrue(t=="http://www.duobeiyun.com/")
+        '''手机号:13011068814 密码：空  点击登录，期望结果：用户名或密码错误'''
+        self.aa.username('13011068814')
+        self.aa.password('')
+        self.aa.click_login()
+        loc = ('xpath','.//*[text()="用户名或密码错误"]')
+        text= self.aa.get_text(loc)
+        self.assertTrue(text=='用户名或密码错误')
 
     @classmethod
     def tearDownClass(cls):

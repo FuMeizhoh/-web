@@ -54,7 +54,7 @@ class Base():
 
 	def click(self,locator):
 		'''点击事件'''
-		ele = self.findElement(locator)
+		ele = self.findElementNew(locator)
 		ele.click()
 
 	def isSelect(self,locator):
